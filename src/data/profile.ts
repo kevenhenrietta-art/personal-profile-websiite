@@ -25,7 +25,7 @@ export type ProfileData = {
 };
 
 export const profileData: ProfileData = {
-  name: "闫朝霞",
+  name: "闫朝霞的个人主页",
   title: "兼具平台能力、业务增长与大模型场景落地能力的 AI 产品经理",
   tagline:
     "8 年互联网产品经验，聚焦医疗健康、消费医疗与平台化建设，主导多个 AI 产品和复杂业务系统从 0 到 1 到多落地，持续推动产品落地、效率提升与商业收入增长。",

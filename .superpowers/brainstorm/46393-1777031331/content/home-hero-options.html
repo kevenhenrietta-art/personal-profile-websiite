@@ -1,0 +1,68 @@
+<h2>首页 Hero 想要哪种“轻松活泼”？</h2>
+<p class="subtitle">点击卡片选择一个方向（不改整体风格，只让首屏更友好）。</p>
+
+<div class="cards">
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 A：克制的挥手（推荐）</div>
+        <div class="mockup-body">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div style="font-size:28px;font-weight:700">Hi，我是兼具平台能力、业务增长与大模型场景落地能力的 AI 产品经理</div>
+            <div style="font-size:26px;opacity:.9">👋</div>
+          </div>
+          <div style="margin-top:10px;opacity:.85">小手轻微摆动 2–3 次后停止；不抢主标题，但更亲和。</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>轻量、稳妥、产品感强</h3>
+      <p>用 Framer Motion 做手势摆动，不引入额外资源与依赖，风险最低。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 B：更活泼的手势 + 渐变贴纸</div>
+        <div class="mockup-body">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div style="font-size:28px;font-weight:700">Hi，我是兼具平台能力、业务增长与大模型场景落地能力的 AI 产品经理</div>
+            <div style="font-size:26px;opacity:.9">👋</div>
+            <div style="font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.22)">Nice to meet you</div>
+          </div>
+          <div style="margin-top:10px;opacity:.85">手势更明显、贴纸强调“打招呼”。整体更轻松，但更“可爱”。</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>更活泼、更社交</h3>
+      <p>适合你想要更明显的“Hi”氛围，但要注意别偏幼态。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 C：手势在侧边浮动（不占标题行）</div>
+        <div class="mockup-body">
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <div style="flex:1">
+              <div style="font-size:28px;font-weight:700">Hi，我是兼具平台能力、业务增长与大模型场景落地能力的 AI 产品经理</div>
+              <div style="margin-top:10px;opacity:.85">挥手在右上角浮动出现（进入视口后播放一次），标题更干净。</div>
+            </div>
+            <div style="font-size:28px;opacity:.9;padding:10px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03)">👋</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>更干净、更不打扰</h3>
+      <p>动效独立于标题行，视觉更克制；适合你希望“活泼但不幼”。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="subtitle">你选定后，我会按该方向在 `Hero` 里落地实现（文案、动效、位置、播放次数）。</p>
+</div>

@@ -1,79 +1,95 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { careerItems } from "@/data/career";
 
 export default function Career() {
+  // 数据按时间正序（最早在上）展示成长路径
+  const items = [...careerItems].reverse();
+
   return (
-    <section id="career" className="border-b border-white/10 bg-[#070D16]">
+    <section id="career" className="relative border-b border-white/10 bg-[#070D16]">
       <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
-        <div className="mb-14 max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.25em] text-cyan-300/80">
-            Career Path
-          </p>
-          <h3 className="mt-4 text-3xl font-semibold text-white md:text-4xl">
-            职业经历
-          </h3>
-          <p className="mt-4 text-base leading-8 text-white/60">
+
+        {/* 标题 */}
+        <div className="mb-14 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+          <h3 className="shrink-0 text-3xl font-semibold text-white md:text-4xl">职业经历</h3>
+          <p className="text-base leading-8 text-white/55 sm:leading-7">
             从运营到复杂系统产品，再到 AI 场景落地与平台化建设，逐步形成完整的产品能力结构。
           </p>
         </div>
 
+        {/* 时间线 */}
         <div className="relative">
-          <div className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-cyan-300/40 via-white/10 to-transparent md:block" />
+          {/* 主轴线 */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-cyan-300/50 via-cyan-300/20 to-transparent md:left-[11px]" />
 
-          <div className="space-y-8">
-            {careerItems.map((item, index) => (
-              <div
-                key={item.id}
-                className="relative grid gap-4 rounded-[28px] border border-white/10 bg-white/[0.04] p-6 md:grid-cols-[72px_1fr] md:p-8"
-              >
-                <div className="relative hidden md:flex">
-                  <div className="relative z-10 mt-1 h-8 w-8 rounded-full border border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_25px_rgba(34,211,238,0.25)]" />
-                </div>
-
-                <div>
-                  <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                    <div>
-                      <p className="text-sm uppercase tracking-[0.2em] text-white/40">
-                        Experience {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <h4 className="mt-2 text-2xl font-semibold text-white">
-                        {item.company}
-                      </h4>
-                      <p className="mt-2 text-base text-cyan-200">{item.role}</p>
-                    </div>
-
-                    <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/65">
-                      {item.period}
-                    </div>
+          <div className="space-y-0">
+            {items.map((item, index) => {
+              const isLast = index === items.length - 1;
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative pl-8 md:pl-12"
+                >
+                  {/* 节点 */}
+                  <div className="absolute left-0 top-1.5 md:left-1">
+                    {isLast ? (
+                      /* 最新经历：发光节点 */
+                      <div className="h-4 w-4 rounded-full border-2 border-cyan-300 bg-cyan-300/20 shadow-[0_0_12px_rgba(34,211,238,0.5)] md:h-5 md:w-5" />
+                    ) : (
+                      /* 历史经历：普通节点 */
+                      <div className="h-3.5 w-3.5 rounded-full border border-white/30 bg-white/10 md:h-4 md:w-4" />
+                    )}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {item.keywords.map((keyword) => (
-                      <span
-                        key={keyword}
-                        className="rounded-full border border-white/10 bg-[#0D1522] px-3 py-1 text-xs text-white/68"
-                      >
-                        {keyword}
+                  {/* 内容区 */}
+                  <div className={`pb-10 ${isLast ? "" : ""}`}>
+                    {/* 角色 + 时间 + 公司 */}
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <span className="text-sm font-medium text-cyan-300/80">{item.role}</span>
+                      <span className="text-white/20">·</span>
+                      <span className="text-[11px] font-medium tracking-[0.12em] text-white/35">
+                        {item.period}
                       </span>
-                    ))}
-                  </div>
+                      <span className="h-px w-4 bg-white/20" />
+                      <h4 className="text-lg font-semibold text-white">{item.company}</h4>
+                    </div>
 
-                  <p className="mt-6 text-sm leading-7 text-white/72 md:text-base">
-                    {item.summary}
-                  </p>
+                    {/* 关键词标签 */}
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {item.keywords.map((kw) => (
+                        <span
+                          key={kw}
+                          className="rounded-full bg-white/[0.05] px-2.5 py-0.5 text-[11px] text-white/50"
+                        >
+                          {kw}
+                        </span>
+                      ))}
+                    </div>
 
-                  <div className="mt-6 grid gap-3">
-                    {item.highlights.map((highlight) => (
-                      <div
-                        key={highlight}
-                        className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/74"
-                      >
-                        {highlight}
-                      </div>
-                    ))}
+                    {/* 阶段简述 */}
+                    <p className="mt-3 text-sm leading-7 text-white/60">
+                      {item.summary}
+                    </p>
+
+                    {/* 代表成果 */}
+                    <div className="mt-3 space-y-1.5">
+                      {item.highlights.map((h) => (
+                        <div key={h} className="flex items-start gap-2">
+                          <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-cyan-300/50" />
+                          <p className="text-sm leading-7 text-white/72">{h}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
