@@ -126,15 +126,6 @@ export default function Projects() {
 
               <div>
                 <h5 className="text-sm font-semibold tracking-[0.18em] text-white/55 uppercase">
-                  关键产品判断
-                </h5>
-                <p className="mt-3 text-sm leading-7 text-white/72 md:text-base">
-                  {activeProject.detail.judgment}
-                </p>
-              </div>
-
-              <div>
-                <h5 className="text-sm font-semibold tracking-[0.18em] text-white/55 uppercase">
                   方案设计
                 </h5>
                 <ul className="mt-3 space-y-3 text-sm leading-7 text-white/72 md:text-base">
