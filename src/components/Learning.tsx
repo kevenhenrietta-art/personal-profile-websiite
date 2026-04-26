@@ -6,7 +6,7 @@ export default function Learning() {
       id="learning"
       className="relative border-b border-white/10 bg-[#08111D] px-5 sm:px-6 lg:px-10"
     >
-      <div className="relative mx-auto max-w-7xl py-20">
+      <div className="relative mx-auto max-w-7xl py-16 lg:py-20">
         <div className="mb-12 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-6 md:mb-14">
           <h3 className="shrink-0 text-3xl font-semibold text-white md:text-4xl">
             {learningData.sectionTitle}

@@ -118,11 +118,19 @@ export default function ProjectCard({ project, active = false, onClick }: Props)
       type="button"
       onClick={onClick}
       className={[
-        "group relative w-full overflow-hidden rounded-[18px] border text-left transition-all duration-300",
+        "group relative w-full overflow-hidden rounded-[18px] border text-left transition-all duration-300 outline-none",
         "bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.94))]",
         active
-          ? "border-cyan-400/35 shadow-[0_0_0_1px_rgba(34,211,238,0.07),0_10px_28px_rgba(6,182,212,0.09)]"
-          : "border-white/10 hover:border-cyan-400/20 hover:shadow-[0_6px_20px_rgba(2,8,23,0.26)]",
+          ? [
+              "border-cyan-300/55",
+              "shadow-[0_0_0_1px_rgba(34,211,238,0.10),0_12px_34px_rgba(6,182,212,0.14)]",
+              "ring-1 ring-cyan-300/20",
+            ].join(" ")
+          : [
+              "border-white/10",
+              "hover:border-cyan-400/25 hover:shadow-[0_8px_26px_rgba(2,8,23,0.30)]",
+              "focus-visible:border-cyan-300/40 focus-visible:ring-2 focus-visible:ring-cyan-300/25",
+            ].join(" "),
       ].join(" ")}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.07),transparent_40%)] opacity-80" />

@@ -1,10 +1,12 @@
 "use client";
 
 import { ProjectItem } from "@/data/projects";
+import { motion, useReducedMotion } from "framer-motion";
 
 type Props = {
   project: ProjectItem;
   active?: boolean;
+  onJumpTo?: (sectionId: string) => void;
 };
 
 // 每个项目的重点词
@@ -105,8 +107,12 @@ function SectionBlock({
   return (
     <div className="relative mt-3">
       {/* 标签 + 内容在同一卡片内，标签轻微外凸 */}
-      <div className={`rounded-[12px] px-4 pt-3 pb-3.5 ${bg}`}>
-        <div className={`inline-block -translate-x-6 rounded-[5px] px-2.5 py-0.5 mb-2 ${tabBg}`}>
+      <div className={`rounded-[12px] px-4 pt-3 pb-3.5 sm:px-5 ${bg}`}>
+        <div className={[
+          "inline-block rounded-[5px] px-2.5 py-0.5 mb-2",
+          "-translate-x-3 sm:-translate-x-6",
+          tabBg,
+        ].join(" ")}>
           <span className={`text-[10px] font-medium tracking-[0.06em] whitespace-nowrap ${tabColor}`}>
             {title}
           </span>
@@ -117,8 +123,9 @@ function SectionBlock({
   );
 }
 
-export default function ProjectDetailPanel({ project, active = false }: Props) {
+export default function ProjectDetailPanel({ project, active = false, onJumpTo }: Props) {
   const keywords = highlightKeywords[project.id] ?? [];
+  const prefersReducedMotion = useReducedMotion();
 
   const H = ({ text }: { text: string }) => (
     <HighlightText text={text} keywords={keywords} />
@@ -126,39 +133,72 @@ export default function ProjectDetailPanel({ project, active = false }: Props) {
 
   return (
     <div className={[
-      "relative rounded-[18px] border bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.94))] p-5 sm:p-6",
+      // 与项目卡片同风格但拉开对比：更偏深蓝/青的底色层
+      "relative rounded-[18px] border bg-[linear-gradient(180deg,rgba(7,16,32,0.98),rgba(1,8,18,0.96))] p-5 sm:p-6",
       active
         ? "border-cyan-400/35 shadow-[0_0_0_1px_rgba(34,211,238,0.07),0_10px_28px_rgba(6,182,212,0.09)]"
         : "border-white/10",
     ].join(" ")}>
-      {/* 顶부 渐变线（与卡片激活态一致） */}
+      {/* 切换项目时的轻量确认感（不突兀） */}
+      {prefersReducedMotion ? null : (
+        <motion.div
+          className="pointer-events-none absolute inset-0 rounded-[18px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.12, 0] }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          style={{
+            background:
+              "radial-gradient(circle at 20% 0%, rgba(34,211,238,0.18), transparent 42%)",
+          }}
+        />
+      )}
+      {/* 顶部 渐变线（与卡片激活态一致） */}
       {active && (
         <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent" />
       )}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.07),transparent_30%)]" />
 
       <div className="relative">
-        {/* 头部：标题 + 角色标签同行 */}
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl">
-            {project.title}
-          </h3>
-          <span className="mt-0.5 shrink-0 rounded-full bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-100/80">
-            {project.role}
-          </span>
+        {/* 头部：具体项目名称 + 项目详情 */}
+        <h3 className="text-xl font-semibold leading-snug tracking-[-0.02em] text-white sm:text-2xl">
+          {`项目详情-「${project.title}」`}
+        </h3>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {[
+            { id: "background", label: "项目背景" },
+            { id: "goal", label: "项目目标" },
+            { id: "responsibility", label: "我的职责" },
+            { id: "solution", label: "方案设计" },
+            { id: "review", label: "我的复盘" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => onJumpTo?.(`project-detail-section-${item.id}`)}
+              className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/65 transition hover:border-cyan-300/20 hover:bg-cyan-300/5 hover:text-white/85"
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
 
-        <div className="mt-3 grid gap-1 ml-4">
+        <div className="mt-4 grid gap-2">
 
-          <SectionBlock title="项目背景">
+          <div id="project-detail-section-background" className="scroll-mt-24">
+            <SectionBlock title="项目背景">
             <p><H text={project.detail.background} /></p>
-          </SectionBlock>
+            </SectionBlock>
+          </div>
 
-          <SectionBlock title="项目目标">
+          <div id="project-detail-section-goal" className="scroll-mt-24">
+            <SectionBlock title="项目目标">
             <p><H text={project.detail.goal} /></p>
-          </SectionBlock>
+            </SectionBlock>
+          </div>
 
-          <SectionBlock title="我的职责">
+          <div id="project-detail-section-responsibility" className="scroll-mt-24">
+            <SectionBlock title="我的职责">
             <ul className="space-y-2">
               {project.detail.responsibility.map((item) => (
                 <li key={item} className="flex items-start gap-2">
@@ -167,9 +207,11 @@ export default function ProjectDetailPanel({ project, active = false }: Props) {
                 </li>
               ))}
             </ul>
-          </SectionBlock>
+            </SectionBlock>
+          </div>
 
-          <SectionBlock title="方案设计">
+          <div id="project-detail-section-solution" className="scroll-mt-24">
+            <SectionBlock title="方案设计">
             <ul className="space-y-2">
               {project.detail.solution.map((item) => (
                 <li key={item} className="flex items-start gap-2">
@@ -178,9 +220,11 @@ export default function ProjectDetailPanel({ project, active = false }: Props) {
                 </li>
               ))}
             </ul>
-          </SectionBlock>
+            </SectionBlock>
+          </div>
 
-          <SectionBlock title="我的复盘" variant="subtle">
+          <div id="project-detail-section-review" className="scroll-mt-24">
+            <SectionBlock title="我的复盘" variant="subtle">
             <div className="space-y-3">
               <p className="text-[12px] font-medium text-cyan-300/60">
                 AI / 平台能力发挥位置
@@ -192,7 +236,8 @@ export default function ProjectDetailPanel({ project, active = false }: Props) {
                 <H text={project.detail.review} />
               </p>
             </div>
-          </SectionBlock>
+            </SectionBlock>
+          </div>
 
         </div>
       </div>

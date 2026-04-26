@@ -104,7 +104,7 @@ export default function Hero() {
   });
 
   return (
-    <section id="top" className="relative overflow-hidden px-5 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:px-10 lg:pb-24 lg:pt-32">
+    <section id="top" className="relative overflow-hidden px-5 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-28 lg:px-10 lg:pb-24 lg:pt-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(56,189,248,0.12),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.08),transparent_32%),linear-gradient(to_bottom,rgba(2,6,23,0.98),rgba(2,6,23,1))]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px)] [background-size:72px_72px]" />
 
@@ -112,7 +112,7 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           <motion.div className="w-full max-w-5xl" {...fadeUpOnce(0.15, 0.9)}>
             <h1 className="mx-auto flex max-w-[980px] flex-col items-center text-center font-medium tracking-[-0.025em] text-white">
-              <span className="mt-4 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-[18px] leading-[1.3] text-white/88 sm:text-[20px] md:text-[22px] lg:text-[24px]">
+              <span className="mt-2 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-[18px] leading-[1.3] text-white/88 sm:text-[20px] md:text-[22px] lg:text-[24px]">
                 <motion.span
                   aria-hidden
                   className="inline-flex origin-[70%_70%] text-[20px] sm:text-[22px] md:text-[24px]"
@@ -187,7 +187,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div className="mt-9 grid w-full max-w-6xl gap-4 lg:grid-cols-[1fr_300px]">
-            <div className="rounded-[26px] bg-white/[0.04] px-4 py-4 backdrop-blur-xl sm:px-5 sm:py-5">
+            <div className="hidden lg:block rounded-[26px] bg-white/[0.04] px-4 py-4 backdrop-blur-xl sm:px-5 sm:py-5">
               <motion.p
                 {...fadeUpOnce(1.65, 0.85)}
                 className="text-left text-xs tracking-[0.18em] text-white/35"
@@ -222,33 +222,35 @@ export default function Hero() {
               </motion.p>
 
               <motion.div
-                className="mt-3 space-y-3"
+                className="mt-3"
                 {...fadeUpOnce(2.15, 0.95)}
               >
-                <a
-                  href="/files/resume.pdf"
-                  download
-                  className="flex items-center justify-between rounded-full bg-white/[0.10] px-5 py-3 text-sm text-white/80 backdrop-blur-md transition hover:bg-white/[0.16]"
-                >
-                  <span>下载 PDF 简历</span>
-                  <Download className="h-4 w-4 text-cyan-300/80" />
-                </a>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href="/files/resume.pdf"
+                    download
+                    className="flex items-center justify-between rounded-full bg-white/[0.10] px-4 py-3 text-sm text-white/80 backdrop-blur-md transition hover:bg-white/[0.16]"
+                  >
+                    <span>下载简历</span>
+                    <Download className="h-4 w-4 text-cyan-300/80" />
+                  </a>
 
-                <button
-                  type="button"
-                  onClick={() => setContactOpen((v) => !v)}
-                  className="flex w-full items-center justify-between rounded-full bg-white/[0.08] px-5 py-3 text-sm text-white/72 backdrop-blur-md transition hover:bg-white/[0.14]"
-                >
-                  <span>联系方式</span>
-                  {contactOpen ? (
-                    <ChevronUp className="h-4 w-4 text-white/50" />
-                  ) : (
-                    <ChevronDown className="h-4 w-4 text-white/50" />
-                  )}
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => setContactOpen((v) => !v)}
+                    className="flex w-full items-center justify-between rounded-full bg-white/[0.08] px-4 py-3 text-sm text-white/72 backdrop-blur-md transition hover:bg-white/[0.14]"
+                  >
+                    <span>联系方式</span>
+                    {contactOpen ? (
+                      <ChevronUp className="h-4 w-4 text-white/50" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 text-white/50" />
+                    )}
+                  </button>
+                </div>
 
                 {contactOpen && (
-                  <div className="rounded-[20px] bg-white/[0.04] px-4 py-4 text-left backdrop-blur-md">
+                  <div className="mt-3 rounded-[20px] bg-white/[0.04] px-4 py-4 text-left backdrop-blur-md">
                     <div className="flex gap-3">
                       <Phone className="mt-0.5 h-4 w-4 text-cyan-300/80" />
                       <div>

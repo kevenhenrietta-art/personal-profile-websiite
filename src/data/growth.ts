@@ -41,6 +41,7 @@ export const growthItems: GrowthItem[] = [
       "快速落地：通过实践，实现验证交互、信息架构与需求表达。",
       "产品验证：强化技术理解与实现判断，快速验证产品是否有效。"
     ],
+    image: "/images/growth/vibe-coding.png",
     tags: ["工具探索", "项目开发", "实践验证"]
   },
   {
@@ -52,6 +53,7 @@ export const growthItems: GrowthItem[] = [
       "结果导向：在规律训练中强化自我管理、抗波动能力与结果导向意识。",
       "清醒稳定：让我在复杂项目推进中保持更稳定的状态与耐力。"
     ],
+    image: "/images/growth/fitness.png",
     tags: ["长期主义", "自我管理", "执行力"]
   }
 ];

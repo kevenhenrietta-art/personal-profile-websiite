@@ -9,7 +9,7 @@ export default function Career() {
 
   return (
     <section id="career" className="relative border-b border-white/10 bg-[#070D16]">
-      <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:py-20">
 
         {/* 标题 */}
         <div className="mb-14 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">

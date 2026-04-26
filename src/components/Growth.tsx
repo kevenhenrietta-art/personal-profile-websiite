@@ -6,7 +6,7 @@ export default function Growth() {
       id="growth"
       className="relative border-b border-white/10 bg-[#070D16] px-5 sm:px-6 lg:px-10"
     >
-      <div className="relative mx-auto max-w-7xl py-20">
+      <div className="relative mx-auto max-w-7xl py-16 lg:py-20">
         <div className="mb-8 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-6 md:mb-10">
           <h3 className="shrink-0 text-3xl font-semibold text-white md:text-4xl">
             长期积累
@@ -53,15 +53,7 @@ export default function Growth() {
                     {item.title}
                   </h4>
                   <p className="mt-2 text-sm text-cyan-200/80">{item.subtitle}</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-7 text-white/58">
-                    {item.details.map((detail) => (
-                      <li key={detail} className="flex gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200/60" />
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex flex-nowrap gap-2.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
@@ -71,6 +63,14 @@ export default function Growth() {
                       </span>
                     ))}
                   </div>
+                  <ul className="mt-3 space-y-2 text-sm leading-7 text-white/58">
+                    {item.details.map((detail) => (
+                      <li key={detail} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200/60" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
