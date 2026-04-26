@@ -31,3 +31,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# accidental nested repo / local folder
+/personal-profile-websiite/
